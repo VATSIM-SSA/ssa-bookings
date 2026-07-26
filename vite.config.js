@@ -44,7 +44,8 @@ export default defineConfig(({ mode }) => {
                         '$envColorPrimary: ' + (env.BOOTSTRAP_COLOR_PRIMARY || '#07262C') + '; ' +
                         '$envColorSecondary: ' + (env.BOOTSTRAP_COLOR_SECONDARY || '#95a5a6') + '; ' +
                         '$envColorTertiary: ' + (env.BOOTSTRAP_COLOR_TERTIARY || '#18BC9C') + '; ' +
-                        '$envColorSuccess: ' + (env.BOOTSTRAP_COLOR_SUCCESS || '#18BC9C') + '; ' +
+                        // VATSSA: teal (brand primary from the palette).
+                        '$envColorSuccess: ' + (env.BOOTSTRAP_COLOR_SUCCESS || '#0197B0') + '; ' +
                         '$envColorWarning: ' + (env.BOOTSTRAP_COLOR_WARNING || '#F39C12') + '; ' +
                         '$envColorDanger: ' + (env.BOOTSTRAP_COLOR_DANGER || '#E74C3C') + ';',
                 },
