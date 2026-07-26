@@ -40,7 +40,8 @@ export default defineConfig(({ mode }) => {
             preprocessorOptions: {
                 scss: {
                     additionalData:
-                        '$envColorPrimary: ' + (env.BOOTSTRAP_COLOR_PRIMARY || '#2C3E50') + '; ' +
+                        // VATSSA: brand background. Drives the navbar and every primary button.
+                        '$envColorPrimary: ' + (env.BOOTSTRAP_COLOR_PRIMARY || '#07262C') + '; ' +
                         '$envColorSecondary: ' + (env.BOOTSTRAP_COLOR_SECONDARY || '#95a5a6') + '; ' +
                         '$envColorTertiary: ' + (env.BOOTSTRAP_COLOR_TERTIARY || '#18BC9C') + '; ' +
                         '$envColorSuccess: ' + (env.BOOTSTRAP_COLOR_SUCCESS || '#18BC9C') + '; ' +
