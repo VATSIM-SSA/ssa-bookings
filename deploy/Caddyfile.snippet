@@ -1,0 +1,21 @@
+# Append to /srv/deploy/caddy/conf/Caddyfile, then:
+#   docker exec caddy caddy validate --config /etc/caddy/Caddyfile
+#   cd /srv/deploy/caddy && docker compose restart
+# (reload is disabled on this box — admin off)
+
+# ── BMAC / Bookings ─────────────────────────────────────────────────────────
+bookings.vatssa.com {
+  import security_headers
+  reverse_proxy bookings-prod:80 {
+    header_up X-Forwarded-Proto https
+  }
+  log { output file /var/log/caddy/bookings-prod.log }
+}
+
+bookings-staging.vatssa.com {
+  import security_headers
+  reverse_proxy bookings-staging:80 {
+    header_up X-Forwarded-Proto https
+  }
+  log { output file /var/log/caddy/bookings-staging.log }
+}

@@ -10,9 +10,16 @@ class TrustProxies extends Middleware
     /**
      * The trusted proxies for this application.
      *
-     * @var array
+     * VATSSA: '*' — Cloudflare terminates TLS, then the tunnel + Caddy talk
+     * plain HTTP internally, so Laravel must trust the X-Forwarded-Proto header
+     * to generate https:// URLs. Without this, OAuth builds an http:// redirect
+     * and Handover/VATSIM returns invalid_client. Safe because the container has
+     * no host ports — only Caddy reaches it. Pairs with Caddy's
+     * `header_up X-Forwarded-Proto https`. See ssa-ovh-management vps-status.md.
+     *
+     * @var array|string|null
      */
-    protected $proxies;
+    protected $proxies = '*';
 
     /**
      * The headers that should be used to detect proxies.
