@@ -1,0 +1,30 @@
+# Copy to /srv/apps/bookings/prod/docker-compose.yml on the VPS.
+# Image is built and published by GitHub Actions — never built on the VPS.
+
+name: bookings-prod
+
+services:
+  bookings-prod:
+    image: ghcr.io/vatsim-ssa/bookings:prod
+    container_name: bookings-prod
+    restart: unless-stopped
+    env_file: /srv/apps/bookings/prod/.env
+    volumes:
+      - /srv/data/bookings/prod/storage:/var/www/html/storage/app/public
+    networks:
+      - app-prod
+      - db-prod
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+networks:
+  app-prod:
+    external: true
+  db-prod:
+    external: true

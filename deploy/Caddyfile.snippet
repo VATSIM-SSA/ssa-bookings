@@ -1,0 +1,25 @@
+# Replace the existing bookings blocks in /srv/deploy/caddy/conf/Caddyfile
+# (they currently lack security_headers and X-Forwarded-Proto), then:
+#   docker exec caddy caddy validate --config /etc/caddy/Caddyfile
+#   cd /srv/deploy/caddy && docker compose restart
+# `caddy reload` is disabled on this box (admin off).
+#
+# The http:// scheme prefix is required — Cloudflare terminates TLS and the
+# tunnel speaks plain HTTP to Caddy, so Caddy must not try to issue certs.
+
+# ── Bookings (BMAC) ─────────────────────────────────────────────────────────
+http://bookings.vatssa.com {
+  import security_headers
+  reverse_proxy bookings-prod:80 {
+    header_up X-Forwarded-Proto https
+  }
+  log { output file /var/log/caddy/bookings-prod.log }
+}
+
+http://bookings-staging.vatssa.com {
+  import security_headers
+  reverse_proxy bookings-staging:80 {
+    header_up X-Forwarded-Proto https
+  }
+  log { output file /var/log/caddy/bookings-staging.log }
+}

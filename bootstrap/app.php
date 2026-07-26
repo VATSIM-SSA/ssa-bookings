@@ -16,7 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // VATSSA: Cloudflare terminates TLS, then the tunnel and Caddy talk
+        // plain HTTP internally. Without trusting the proxy, Laravel generates
+        // http:// URLs and OAuth fails with invalid_client. Safe because the
+        // container publishes no host ports — only Caddy can reach it. Pairs
+        // with Caddy's `header_up X-Forwarded-Proto https`.
         $middleware->trustProxies(
+            at: '*',
             headers: Request::HEADER_X_FORWARDED_FOR |
                 Request::HEADER_X_FORWARDED_HOST |
                 Request::HEADER_X_FORWARDED_PORT |
