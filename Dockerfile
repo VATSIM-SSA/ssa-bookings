@@ -1,8 +1,21 @@
 # Production image for VATSSA Bookings (BMAC fork of daveroverts/bmac).
 # Upstream ships only Laravel Sail (dev), so this is the prod build.
 #
-# Three stages: Vite assets, Composer vendor, then a PHP-Apache runtime.
+# Three stages: Composer vendor, Vite assets, then a PHP-Apache runtime.
 # Built by GitHub Actions and published to ghcr.io/vatsim-ssa/bookings.
+
+# ---------- composer vendor ----------
+# Runs BEFORE the frontend stage on purpose: PurgeCSS scans
+# vendor/laravel/framework/.../Pagination/resources/views for the Bootstrap
+# pagination templates. Without vendor/ present it strips .pagination,
+# .page-item and .page-link, and pagination renders as bare bullet lists.
+FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+# --no-scripts: post-autoload-dump runs `artisan package:discover`, which boots
+# the app and needs an .env we deliberately do not ship at build time.
+RUN composer install --no-dev --no-interaction --prefer-dist \
+      --no-scripts --no-autoloader --ignore-platform-reqs
 
 # ---------- frontend assets (Vite -> public/build) ----------
 FROM node:22-alpine AS frontend
@@ -11,16 +24,8 @@ COPY package.json package-lock.json ./
 RUN npm ci
 # vite-plugin-static-copy reads from resources/ and public/, so copy the tree.
 COPY . .
+COPY --from=vendor /app/vendor ./vendor
 RUN npm run build
-
-# ---------- composer vendor ----------
-FROM composer:2 AS vendor
-WORKDIR /app
-COPY composer.json composer.lock ./
-# --no-scripts: post-autoload-dump runs `artisan package:discover`, which boots
-# the app and needs an .env we deliberately do not ship at build time.
-RUN composer install --no-dev --no-interaction --prefer-dist \
-      --no-scripts --no-autoloader --ignore-platform-reqs
 
 # ---------- runtime ----------
 FROM php:8.4-apache-bookworm
