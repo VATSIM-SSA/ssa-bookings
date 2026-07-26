@@ -44,7 +44,7 @@
                 @if ($booking->status === \App\Enums\BookingStatus::BOOKED)
                     {{-- Check if booking has been booked by current user --}}
                     @if (auth()->check() && $booking->user_id == auth()->id())
-                        <a href="{{ route('bookings.show', $booking) }}" class="btn btn-info">My
+                        <a href="{{ route('bookings.show', $booking) }}" class="btn btn-primary">My
                             booking</a>
                     @else
                         <button class="btn btn-dark disabled">
@@ -55,7 +55,7 @@
                     {{-- Check if a booking has been reserved --}}
                     @can('update', $booking)
                         {{-- Check if a booking has been reserved by current user --}}
-                        <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-info">My
+                        <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-primary">My
                             Reservation</a>
                     @else
                         <button class="btn btn-dark disabled">

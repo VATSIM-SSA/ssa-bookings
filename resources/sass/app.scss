@@ -15,7 +15,7 @@ $theme-colors: (
     primary: $envColorPrimary,
     secondary: $envColorSecondary,
     success: $envColorSuccess,
-    info: $info,
+    info: $envColorInfo,
     warning: $envColorWarning,
     danger: $envColorDanger,
     light: $light,
@@ -35,6 +35,26 @@ $navbar-dark-active-color: $envColorTertiary;
 $link-color: $envColorSecondary;
 $link-hover-color: shade-color($envColorSecondary, 25%);
 
+// Pagination. Bootswatch Flatly binds $pagination-bg to its own $success at
+// import time, so $theme-colors cannot reach it — these must be set here.
+// Neutral links with the brand green reserved for the current page: a solid
+// green bar with one contrasting cell reads as a glitch rather than a control.
+$pagination-color: $envColorPrimary;
+$pagination-bg: #fff;
+$pagination-border-width: 1px;
+$pagination-border-color: #dee2e6;
+$pagination-hover-color: $envColorPrimary;
+$pagination-hover-bg: tint-color($envColorGreen, 70%);
+$pagination-hover-border-color: tint-color($envColorGreen, 40%);
+$pagination-focus-color: $envColorPrimary;
+$pagination-focus-bg: tint-color($envColorGreen, 70%);
+$pagination-active-color: $envColorPrimary;
+$pagination-active-bg: $envColorGreen;
+$pagination-active-border-color: $envColorGreen;
+$pagination-disabled-color: #adb5bd;
+$pagination-disabled-bg: #fff;
+$pagination-disabled-border-color: #dee2e6;
+
 // Import boostrap
 @import 'bootstrap/scss/bootstrap';
 // Bootswatch Flatly
@@ -48,6 +68,14 @@ $link-hover-color: shade-color($envColorSecondary, 25%);
 .navbar-laravel {
     background-color: $envColorPrimary;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    // Taller bar so the VATSSA wordmark reads at a usable size.
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-laravel .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .event-title a {

@@ -6,5 +6,5 @@ echo $fromYear . ($fromYear !== $thisYear ? '-' . $thisYear : ''); ?> Booking Sy
     maintained by <a href="{{ config('app.division_url') }}" target="_blank">{{ config('app.division') }}</a>
     <br>
     <a class="navbar-brand" href="{{ config('app.division_url') }}"><img
-            src="{{ asset('images/division-horizontal.png') }}" height="45"></a>
+            src="{{ asset('images/vatssa-horizontal-dark.svg') }}" height="56" alt="VATSSA"></a>
 </footer>

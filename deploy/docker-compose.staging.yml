@@ -1,0 +1,30 @@
+# Copy to /srv/apps/bookings/staging/docker-compose.yml on the VPS.
+# Image is built and published by GitHub Actions — never built on the VPS.
+
+name: bookings-staging
+
+services:
+  bookings-staging:
+    image: ghcr.io/vatsim-ssa/bookings:staging
+    container_name: bookings-staging
+    restart: unless-stopped
+    env_file: /srv/apps/bookings/staging/.env
+    volumes:
+      - /srv/data/bookings/staging/storage:/var/www/html/storage/app/public
+    networks:
+      - app-staging
+      - db-staging
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+networks:
+  app-staging:
+    external: true
+  db-staging:
+    external: true
