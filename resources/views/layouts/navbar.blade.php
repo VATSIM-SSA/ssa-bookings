@@ -2,7 +2,7 @@
     <div class="container">
 
         <a class="navbar-brand" href="{{ URL::to('/') }}"><img
-                src="{{ asset('images/vatssa-horizontal-white.svg') }}" height="38" alt="VATSSA"></a>
+                src="{{ asset('images/vatssa-horizontal-white.svg') }}" height="64" alt="VATSSA"></a>
 
         <a class="navbar-brand" href="{{ URL::to('/') }}">
             {{ config('app.title') }}
