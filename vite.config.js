@@ -47,9 +47,10 @@ export default defineConfig(({ mode }) => {
                         '$envColorTertiary: ' + (env.BOOTSTRAP_COLOR_TERTIARY || '#0197B0') + '; ' +
                         // VATSSA: teal — informational actions (Edit, Book Now, Send E-mail).
                         '$envColorInfo: ' + (env.BOOTSTRAP_COLOR_INFO || '#0197B0') + '; ' +
-                        // VATSSA: green — positive actions and pagination, which
-                        // Bootswatch Flatly derives from $success.
-                        '$envColorSuccess: ' + (env.BOOTSTRAP_COLOR_SUCCESS || '#7BD758') + '; ' +
+                        // VATSSA: teal — positive actions, matching info.
+                        '$envColorSuccess: ' + (env.BOOTSTRAP_COLOR_SUCCESS || '#0197B0') + '; ' +
+                        // VATSSA: brand green. Used only for pagination — see app.scss.
+                        '$envColorGreen: ' + (env.BOOTSTRAP_COLOR_GREEN || '#7BD758') + '; ' +
                         '$envColorWarning: ' + (env.BOOTSTRAP_COLOR_WARNING || '#F39C12') + '; ' +
                         // Deeper red than Flatly's #E74C3C — reads better against #07262C.
                         // Deliberately not a brand colour: destructive actions must not blend in.
