@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
     <div class="container">
 
-        <a class="navbar-brand" href="{{ URL::to('/') }}"><img
-                src="{{ asset('images/vatssa-horizontal-white.svg') }}" height="64" alt="VATSSA"></a>
+        <a class="navbar-brand" href="{{ URL::to('/') }}"><img src="{{ asset('images/vatssa-icon.svg') }}"
+                height="64" alt="VATSSA"></a>
 
         <a class="navbar-brand" href="{{ URL::to('/') }}">
             {{ config('app.title') }}
