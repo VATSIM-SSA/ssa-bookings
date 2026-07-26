@@ -48,6 +48,14 @@ $link-hover-color: shade-color($envColorSecondary, 25%);
 .navbar-laravel {
     background-color: $envColorPrimary;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    // Taller bar so the VATSSA wordmark reads at a usable size.
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-laravel .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .event-title a {
