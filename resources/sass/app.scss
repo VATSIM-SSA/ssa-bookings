@@ -35,21 +35,25 @@ $navbar-dark-active-color: $envColorTertiary;
 $link-color: $envColorSecondary;
 $link-hover-color: shade-color($envColorSecondary, 25%);
 
-// Pagination — VATSSA green. Bootswatch Flatly binds $pagination-bg to its own
-// $success at import time, so $theme-colors has no effect here and these have
-// to be set explicitly. Dark navy text on the light green for contrast; the
-// active page inverts to navy so the current position is unmistakable.
+// Pagination. Bootswatch Flatly binds $pagination-bg to its own $success at
+// import time, so $theme-colors cannot reach it — these must be set here.
+// Neutral links with the brand green reserved for the current page: a solid
+// green bar with one contrasting cell reads as a glitch rather than a control.
 $pagination-color: $envColorPrimary;
-$pagination-bg: $envColorGreen;
+$pagination-bg: #fff;
+$pagination-border-width: 1px;
+$pagination-border-color: #dee2e6;
 $pagination-hover-color: $envColorPrimary;
-$pagination-hover-bg: shade-color($envColorGreen, 12%);
+$pagination-hover-bg: tint-color($envColorGreen, 70%);
+$pagination-hover-border-color: tint-color($envColorGreen, 40%);
 $pagination-focus-color: $envColorPrimary;
-$pagination-focus-bg: shade-color($envColorGreen, 12%);
-$pagination-active-color: #fff;
-$pagination-active-bg: $envColorPrimary;
-$pagination-active-border-color: $envColorPrimary;
-$pagination-disabled-color: shade-color($envColorGreen, 35%);
-$pagination-disabled-bg: tint-color($envColorGreen, 45%);
+$pagination-focus-bg: tint-color($envColorGreen, 70%);
+$pagination-active-color: $envColorPrimary;
+$pagination-active-bg: $envColorGreen;
+$pagination-active-border-color: $envColorGreen;
+$pagination-disabled-color: #adb5bd;
+$pagination-disabled-bg: #fff;
+$pagination-disabled-border-color: #dee2e6;
 
 // Import boostrap
 @import 'bootstrap/scss/bootstrap';
