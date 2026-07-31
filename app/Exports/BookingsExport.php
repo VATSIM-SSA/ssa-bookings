@@ -24,6 +24,7 @@ class BookingsExport
             ->with(['user', 'flights.airportDep', 'flights.airportArr'])
             ->booked()
             ->get()
+            ->sortBy(fn (Booking $booking): ?int => $booking->flights->first()?->ctot?->timestamp)
             ->each(fn (Booking $booking): SimpleExcelWriter => $writer->addRow($this->map($booking)));
 
         $writer->close();
