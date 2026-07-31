@@ -72,7 +72,7 @@ class Bookings extends Component
                 match ($this->filter) {
                     'departures' => $query->where('dep', $this->event->dep)->orderBy('ctot'),
                     'arrivals' => $query->where('arr', $this->event->arr)->orderBy('eta'),
-                    default => $query->orderBy('eta')->orderBy('ctot'),
+                    default => $query->orderBy('ctot')->orderBy('eta'),
                 };
             })
             ->get();
@@ -85,8 +85,8 @@ class Bookings extends Component
                     return $booking->flights->first()?->eta?->timestamp;
                 default:
                     $flight = $booking->flights->first();
-                    // Default needs to order by eta, if not filled in, by ctot
-                    return $flight?->eta?->timestamp ?: $flight?->ctot?->timestamp;
+                    // Default needs to order by ctot, if not filled in, by eta
+                    return $flight?->ctot?->timestamp ?: $flight?->eta?->timestamp;
             }
         });
     }
