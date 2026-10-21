@@ -28,7 +28,7 @@ COPY --from=vendor /app/vendor ./vendor
 RUN npm run build
 
 # ---------- runtime ----------
-FROM php:8.4-apache-bookworm
+FROM php:8.4.27-apache-bookworm
 
 EXPOSE 80
 
